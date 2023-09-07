@@ -1,43 +1,90 @@
 const measure = document.getElementById("measure");
 let timeout;
 function startLoop(measure) {
-  const beats = Array.from(measure.getElementsByClassName("beat"));
-  continueMeasure(beats);
+  const markOn = Array.from(document.getElementsByName("mark")).find(
+    (e) => e.checked,
+  ).value;
+  const intervals = getIntervals(measure, markOn);
+  continueMeasure(intervals);
 }
 
 function resetLoop(measure) {
   clearTimeout(timeout);
-  const beats = Array.from(measure.getElementsByClassName("beat"));
-  beats.map((b) => b.classList.remove("active"));
+  const markOn = Array.from(document.getElementsByName("mark")).find(
+    (e) => e.checked,
+  ).value;
+  const intervals = getIntervals(measure, markOn);
+  intervals.map((b) => b.classList.remove("active"));
 }
 
-function continueMeasure(beats) {
-  const bpm = parseInt(document.getElementById("bpm").value);
-  const activeBeat = getActiveBeat(beats);
+function continueMeasure(intervals) {
+  const toksPerMinute = getToksPerMinute();
+  const activeInterval = getActiveInterval(intervals);
   const tok = new Audio("./lib/tok.mp3");
   tok.play();
   delete tok;
   timeout = setTimeout(() => {
-    progressBeat(beats, activeBeat);
-  }, 60000 / bpm);
+    progressInterval(intervals, activeInterval);
+  }, 60000 / toksPerMinute);
 }
 
-function progressBeat(beats, activeBeat) {
-  const progressToIndex = beats.indexOf(activeBeat) + 1;
-  const nextBeat =
-    progressToIndex >= beats.length ? beats[0] : beats[progressToIndex];
-  activeBeat.classList.remove("active");
-  nextBeat.classList.add("active");
-  continueMeasure(beats);
+function progressInterval(intervals, activeInterval) {
+  const progressToIndex = intervals.indexOf(activeInterval) + 1;
+  const nextInterval =
+    progressToIndex >= intervals.length
+      ? intervals[0]
+      : intervals[progressToIndex];
+  activeInterval.classList.remove("active");
+  nextInterval.classList.add("active");
+  continueMeasure(intervals);
 }
 
-function getActiveBeat(beats) {
-  const activeBeat = beats.find((beat) => beat.classList.contains("active"));
-  if (activeBeat) return activeBeat;
+function getActiveInterval(intervals) {
+  const activeInterval = intervals.find((interval) =>
+    interval.classList.contains("active"),
+  );
+  if (activeInterval) return activeInterval;
 
-  const defaultBeat = beats[0];
-  defaultBeat.classList.add("active");
-  return defaultBeat;
+  const defaultInterval = intervals[0];
+  defaultInterval.classList.add("active");
+  return defaultInterval;
+}
+
+function getIntervals(measure, markOn) {
+  switch (markOn) {
+    case "1":
+      return Array.from(measure.getElementsByClassName("beat"));
+    case "1/8":
+      return Array.from(measure.getElementsByClassName("8th"));
+    case "1/16":
+      const beats = Array.from(measure.getElementsByClassName("beat"));
+      const orderedSixteenths = [];
+      beats.map((beat) => {
+        const sixteenths = Array.from(beat.getElementsByClassName("16th"));
+        const sorted = sixteenths.sort((a, b) => {
+          if (a.dataset["sixteenths"] === b.dataset["sixteenths"]) return 0;
+          if (a.dataset["sixteenths"] < b.dataset["sixteenths"]) return -1;
+          if (a.dataset["sixteenths"] > b.dataset["sixteenths"]) return 1;
+        });
+        orderedSixteenths.push(sorted);
+      });
+      return orderedSixteenths.flat();
+  }
+}
+
+function getToksPerMinute() {
+  const markOn = Array.from(document.getElementsByName("mark")).find(
+    (e) => e.checked,
+  ).value;
+  const bpm = parseInt(document.getElementById("bpm").value);
+  switch (markOn) {
+    case "1":
+      return bpm;
+    case "1/8":
+      return bpm * 2;
+    case "1/16":
+      return bpm * 4;
+  }
 }
 
 document
