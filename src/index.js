@@ -1,3 +1,6 @@
+import "./style.css";
+import tokSound from "../lib/tok.mp3";
+
 const measure = document.getElementById("measure");
 let timeout;
 function startLoop(measure) {
@@ -20,9 +23,9 @@ function resetLoop(measure) {
 function continueMeasure(intervals) {
   const toksPerMinute = getToksPerMinute();
   const activeInterval = getActiveInterval(intervals);
-  const tok = new Audio("./lib/tok.mp3");
+  const tok = new Audio(tokSound);
   tok.play();
-  delete tok;
+  // delete tok;
   timeout = setTimeout(() => {
     progressInterval(intervals, activeInterval);
   }, 60000 / toksPerMinute);
