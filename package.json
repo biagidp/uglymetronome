@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack serve",
     "build": "webpack build",
+    "deploy": "webpack build --mode production && aws s3 cp ./dist s3://www.uglymetronome.com --recursive",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
