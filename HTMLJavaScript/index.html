@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <div class="centered">
+        <h1>Ugly Metronome</h1>
+      </div>
+      <div id="measure" class="centered">
+        <div 
+          class="beat"
+        >
+          <div class="beat-label">
+            1
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="1"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="3"
+            ></div>
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="2"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="4"
+            ></div>
+          </div>
+        </div>
+        <div 
+          class="beat"
+        >
+          <div class="beat-label">
+            2
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="1"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="3"
+            ></div>
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="2"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="4"
+            ></div>
+          </div>
+        </div>
+        <div class="beat">
+          <div class="beat-label">
+            3
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="1"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="3"
+            ></div>
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="2"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="4"
+            ></div>
+          </div>
+        </div>
+        <div 
+          class="beat"
+        >
+          <div class="beat-label">
+            4
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="1"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="3"
+            ></div>
+          </div>
+          <div class="eighth">
+            <div
+              class="sixteenth"
+              data-sixteenths="2"
+            ></div>
+            <div
+              class="sixteenth"
+              data-sixteenths="4"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="bpm">BPM:</label>
+      <input type="text" id="bpm" name="bpm" value="60"/>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Mark:</legend>
+        <div>
+          <input type="radio" name="mark" id="1" value="1" checked />
+          <label for="1">On the beat</label>
+        </div>
+        <div>
+          <input type="radio" name="mark" id="1/8" value="1/8" />
+          <label for="1/8">On the Eighths</label>
+        </div>
+        <div>
+          <input type="radio" name="mark" id="1/16" value="1/16" />
+          <label for="1/16">On the Sixteenths</label>
+        </div>
+      </fieldset>
+    </div>
+    <div>
+      <button id="start-button">Start</button>
+      <button id="stop-button">Stop</button>
+    </div>
+    <script src="./index.js" type="text/javascript"></script>
+    <div class="centered">
+      <a href="https://github.com/biagidp/uglymetronome">github</a>
+    </div>
+  </body>
+</html>
