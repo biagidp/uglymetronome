@@ -1,5 +1,13 @@
 import React from "react";
+import Beat from "./Beat.jsx";
 
 export default function Measure() {
-  return (<h1>Hellow World</h1>);
+  return (
+    <div class="flex justify-center items-center">
+      <Beat label="1" />
+      <Beat label="2" />
+      <Beat label="3" />
+      <Beat label="4" />
+    </div>
+  )
 };
