@@ -1,32 +1,46 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { defaultState } from './UglyMetronome.jsx'
 
-export default function Form() {
+export default function Form({settings, setSettings}) {
+  const [bpm, setBpm] = useState(settings.bpm)
+  const [mark, setMark] = useState(settings.mark)
+  const markChange = (e) => {setMark(e.target.value)}
+
+  const startPlaying = () => {
+    setSettings({
+      bpm,
+      mark,
+      running: true
+    })
+  }
+  const stopPlaying = () => {setSettings(defaultState)}
+
   return (
     <div>
       <div>
-        <label for="bpm">BPM:</label>
-        <input type="text" id="bpm" name="bpm" value="60"/>
+        <label htmlFor="bpm">BPM:</label>
+        <input type="text" name='bpm' value={bpm} onChange={e => setBpm(e.target.value)}/>
       </div>
       <div>
         <fieldset>
           <legend>Mark:</legend>
           <div>
-            <input type="radio" name="mark" id="1" value="1" checked />
-            <label for="1">On the beat</label>
+            <input type="radio" name="mark" id="whole" value="whole" checked={mark === "whole"} onChange={markChange} />
+            <label htmlFor="whole">On the beat</label>
           </div>
           <div>
-            <input type="radio" name="mark" id="1/8" value="1/8" />
-            <label for="1/8">On the Eighths</label>
+            <input type="radio" name="mark" id="eighth" value="eighth" checked={mark === "eighth"} onChange={markChange} />
+            <label htmlFor="eighth">On the Eighths</label>
           </div>
           <div>
-            <input type="radio" name="mark" id="1/16" value="1/16" />
-            <label for="1/16">On the Sixteenths</label>
+            <input type="radio" name="mark" id="sixteenth" value="sixteenth" checked={mark === "sixteenth"} onChange={markChange} />
+            <label htmlFor="sixteenth">On the Sixteenths</label>
           </div>
         </fieldset>
       </div>
       <div>
-        <button id="start-button">Start</button>
-        <button id="stop-button">Stop</button>
+        <button onClick={startPlaying}>Start</button>
+        <button onClick={stopPlaying}>Stop</button>
       </div>
     </div>
   )

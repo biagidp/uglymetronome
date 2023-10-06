@@ -1,12 +1,10 @@
 import React from "react"
-import Sixteenth from "./Sixteenth.jsx"
 
-export default function Eighth() {
+export default function Eighth({children}) {
 
   return(
-    <div class="flex flex-col w-1/2 h-full">
-      <Sixteenth />
-      <Sixteenth />
+    <div className="flex flex-col w-1/2 h-full">
+      {children}
     </div>
   )
 }

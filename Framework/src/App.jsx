@@ -2,13 +2,11 @@ import "./style.css"
 import React from "react";
 import { StrictMode } from "react";
 import {createRoot} from "react-dom/client"
-import Measure from "./components/Measure.jsx";
-import Form from "./components/Form.jsx";
+import UglyMetronome from "./components/UglyMetronome.jsx";
 
 const root = createRoot(document.getElementById("app"));
 root.render(
   <StrictMode>
-    <Measure/>
-    <Form />
+    <UglyMetronome />
   </StrictMode>
 );
