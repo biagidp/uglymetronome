@@ -1,19 +1,25 @@
 import React, {useState} from 'react'
 import { defaultState } from './UglyMetronome.jsx'
 
-export default function Form({settings, setSettings}) {
+export default function Form({settings, setSettings, onStart, onStop}) {
   const [bpm, setBpm] = useState(settings.bpm)
   const [mark, setMark] = useState(settings.mark)
   const markChange = (e) => {setMark(e.target.value)}
 
   const startPlaying = () => {
+    if(settings.running) return
+
     setSettings({
       bpm,
       mark,
       running: true
     })
+    onStart()
   }
-  const stopPlaying = () => {setSettings(defaultState)}
+  const stopPlaying = () => {
+    onStop()
+    setSettings(defaultState)
+  }
 
   return (
     <div>
