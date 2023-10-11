@@ -13,6 +13,7 @@ let interval
 export default function UglyMetronome() {
   const [metronomeState, setMetronomeState] = useState(defaultState)
   const [currentBeat, setCurrentBeat] = useState()
+  const beatDuration = 60000/metronomeState.bpm 
   
   const advanceBeat = (index = 0) => {
     setCurrentBeat(index)
@@ -20,7 +21,7 @@ export default function UglyMetronome() {
       () => {
         const nextBeat = index + 1 >= 4 ? 0 : index + 1
         advanceBeat(nextBeat)
-      }, 60000/metronomeState.bpm
+      }, beatDuration 
     )
   }
 
@@ -36,10 +37,10 @@ export default function UglyMetronome() {
   return (
     <div>
       <Measure settings={metronomeState}>
-        <Beat label={1} active={ currentBeat === 0} />
-        <Beat label={2} active={ currentBeat === 1} />
-        <Beat label={3} active={ currentBeat === 2} />
-        <Beat label={4} active={ currentBeat === 3} />
+        <Beat label={1} active={ currentBeat === 0} duration={beatDuration} type={metronomeState.mark} />
+        <Beat label={2} active={ currentBeat === 1} duration={beatDuration} type={metronomeState.mark} />
+        <Beat label={3} active={ currentBeat === 2} duration={beatDuration} type={metronomeState.mark} />
+        <Beat label={4} active={ currentBeat === 3} duration={beatDuration} type={metronomeState.mark} />
       </Measure>
       <Form
         settings={metronomeState}

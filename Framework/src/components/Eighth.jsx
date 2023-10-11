@@ -1,9 +1,9 @@
 import React from "react"
 
-export default function Eighth({children}) {
+export default function Eighth({active, children}) {
 
   return(
-    <div className="flex flex-col w-1/2 h-full">
+    <div className={`${active ? 'active' : ''} flex flex-col w-1/2 h-full`}>
       {children}
     </div>
   )

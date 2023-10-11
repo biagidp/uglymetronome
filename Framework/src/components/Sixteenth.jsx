@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Sixteenth(){
+export default function Sixteenth({active}){
 
   return(
     <div
-      className="w-full h-full"
+      className={`${active ? 'active' : ''} w-full h-full`}
     ></div>
   )
 }
