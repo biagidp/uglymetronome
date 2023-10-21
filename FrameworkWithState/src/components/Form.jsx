@@ -12,8 +12,23 @@ export default function Form() {
   const dispatch = useDispatch()
 
   const [bpm, setBpm] = useState(settings.bpm)
+  const bpmChange = (e) => {
+    setBpm(e.target.value)
+    dispatch({
+      type: "update",
+      bpm: e.target.value
+    })
+  }
   const [mark, setMark] = useState(settings.mark)
-  const markChange = (e) => {setMark(e.target.value)}
+  const markChange = (e) => {
+    setMark(e.target.value)
+    dispatch({
+      type: "update",
+      mark: e.target.value
+    })
+  }
+
+  const [intervalId, setIntervalId] = useState()
 
   const startPlaying = () => {
     if(settings.running) return
@@ -22,13 +37,16 @@ export default function Form() {
 
     dispatch({
       type: "update",
-      bpm,
-      mark,
       running: true,
       activeBeat: `1/${denominator}`
     })
+    const interval = setInterval(() => {
+      dispatch({type: 'advance'})
+    }, settings.beatDuration)
+    setIntervalId(interval)
   }
   const stopPlaying = () => {
+    clearInterval(intervalId)
     dispatch({
       type: "reset",
     })
@@ -38,7 +56,7 @@ export default function Form() {
     <div>
       <div>
         <label htmlFor="bpm">BPM:</label>
-        <input type="text" name='bpm' value={bpm} onChange={e => setBpm(e.target.value)}/>
+        <input type="text" name='bpm' value={bpm} onChange={bpmChange}/>
       </div>
       <div>
         <fieldset>

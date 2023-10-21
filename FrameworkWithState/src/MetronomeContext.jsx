@@ -38,11 +38,13 @@ function reducer(settings, action) {
         activeBeat: action.activeBeat || settings.activeBeat,
       }
       newSettings.beatDuration = getDuration(newSettings.bpm, newSettings.mark)
-      console.log({newSettings})
+      
       return newSettings
     }
     case 'reset': {
-      return defaultSettings 
+      const newSettings = Object.create(settings)
+      newSettings.running = false
+      return newSettings
     }
     default: {
       throw Error("Unknown Action: " + action.type)
