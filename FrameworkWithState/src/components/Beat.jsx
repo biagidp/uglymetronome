@@ -17,12 +17,12 @@ export default function Beat({label}){
         {label}
       </h1>
       <Eighth beatFraction={`${parseInt(label)*2-1}/8`}>
-        {/* <Sixteenth active={active && activeFraction === "1/16"} />
-        <Sixteenth active={active && activeFraction === "3/16"} /> */}
+        <Sixteenth beatFraction={`${parseInt(label)*4-3}/16`} />
+        <Sixteenth beatFraction={`${(parseInt(label)*4-3)+2}/16`} />
       </Eighth>
       <Eighth beatFraction={`${parseInt(label)*2}/8`}>
-        {/* <Sixteenth active={active && activeFraction === "2/16"} />
-        <Sixteenth active={active && activeFraction === "4/16"} /> */}
+        <Sixteenth beatFraction={`${(parseInt(label)*4-3)+1}/16`} />
+        <Sixteenth beatFraction={`${(parseInt(label)*4-3)+3}/16`} />
       </Eighth>
     </div>
   )
